@@ -10,7 +10,8 @@ const app = express();
 const server = require("http").createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173", // React app's URL
+    origin:
+      "https://chat-application-c76jglggt-pankaj-parihars-projects.vercel.app/", // React app's URL
     methods: ["GET", "POST"],
   },
 });
