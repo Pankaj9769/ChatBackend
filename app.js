@@ -11,7 +11,12 @@ const server = require("http").createServer(app);
 const cors = require("cors");
 const io = new Server(server, {
   cors: {
-    origin: "https://chat-frontend-eta-seven.vercel.app/", // React app's URL
+    origin: [
+      "http://localhost:5173",
+      "http://localhost:5173/",
+      "https://chat-frontend-eta-seven.vercel.app/",
+      "https://chat-frontend-eta-seven.vercel.app",
+    ], // React app's URL
     methods: ["GET", "POST"],
   },
 });
@@ -20,13 +25,7 @@ require("dotenv").config();
 connect();
 
 app.use(express.json());
-app.use(
-  cors({
-    origin: "https://chat-frontend-eta-seven.vercel.app",
-    methods: ["GET", "POST"],
-    credentials: true,
-  })
-);
+app.use(cors());
 
 app.use(authRouter);
 app.use(userRouter);
