@@ -8,20 +8,25 @@ const { Server } = require("socket.io");
 
 const app = express();
 const server = require("http").createServer(app);
+const cors = require("cors");
 const io = new Server(server, {
   cors: {
-    origin:
-      "https://chat-application-c76jglggt-pankaj-parihars-projects.vercel.app/", // React app's URL
+    origin: "https://chat-frontend-eta-seven.vercel.app/", // React app's URL
     methods: ["GET", "POST"],
   },
 });
 
-const cors = require("cors");
 require("dotenv").config();
 connect();
 
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://chat-frontend-eta-seven.vercel.app",
+    methods: ["GET", "POST"],
+    credentials: true,
+  })
+);
 
 app.use(authRouter);
 app.use(userRouter);
